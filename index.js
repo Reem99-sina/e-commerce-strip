@@ -1,11 +1,12 @@
 import express from "express";
 import Stripe from "stripe";
+import cors from "cors";
 require("dotenv").config();
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 app.use(express.json());
-
+app.use(cors());
 app.post("/api/create-checkout-session", async (req, res) => {
   const { products, shipping } = req.body;
 
