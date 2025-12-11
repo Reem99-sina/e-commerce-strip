@@ -4,8 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 const stripe = new Stripe(
-  process.env.STRIPE_SECRET_KEY ||
-    "sk_test_51M9peeJJJvaHsLdecc5ypi04M0PFWT6re3FTMoSTTyv7sn9l25q549zkGWYx4KenVyiI1C2R0FpqFYDH5qgYKFJp000UdTqm1x"
+  process.env.STRIPE_SECRET_KEY 
 );
 
 const app = express();
