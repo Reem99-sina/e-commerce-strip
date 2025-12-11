@@ -1,14 +1,15 @@
 import express from "express";
 import Stripe from "stripe";
-require('dotenv').config();
-const stripe = new Stripe(
-  process.env.STRIPE_SECRET_KEY
-);
+require("dotenv").config();
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 app.use(express.json());
 
 app.post("/api/create-checkout-session", async (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     line_items: [
@@ -29,7 +30,7 @@ app.post("/api/create-checkout-session", async (req, res) => {
   });
   res.json({ url: session.url, id: session.id });
 });
-app.get("/",()=>{
-  res.json({message:"done"})
-})
+app.get("/", () => {
+  res.json({ message: "done" });
+});
 app.listen(3000);
