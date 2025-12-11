@@ -29,5 +29,7 @@ app.post("/api/create-checkout-session", async (req, res) => {
   });
   res.json({ url: session.url, id: session.id });
 });
-
+app.get("/",()=>{
+  res.json({message:"done"})
+})
 app.listen(3000);
